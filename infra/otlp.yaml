@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otlp
+  labels:
+    app: otlp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otlp
+  template:
+    metadata:
+      name: otlp
+      labels:
+        app: otlp
+    spec:
+      volumes:
+        - name: otel-volume
+          emptyDir: {}
+      initContainers:
+        - name: fetch-agent-jar
+          image: curlimages/curl
+          command:
+            - sh
+            - -c
+            - >
+              curl -L https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar \
+                            -o /otel/opentelemetry-javaagent.jar
+      containers:
+        - name: otlp
+          image: nginx
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
