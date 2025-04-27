@@ -16,12 +16,12 @@ spec:
         app: otlp
     spec:
       volumes:
-        - name: otel-volume
+        - name: otlp-volume
           emptyDir: {}
       containers:
         - name: otlp
           image: spring-server
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Never
           ports:
             - containerPort: 8080
               protocol: TCP
