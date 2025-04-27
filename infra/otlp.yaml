@@ -18,20 +18,11 @@ spec:
       volumes:
         - name: otel-volume
           emptyDir: {}
-      initContainers:
-        - name: fetch-agent-jar
-          image: curlimages/curl
-          command:
-            - sh
-            - -c
-            - >
-              curl -L https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar \
-                            -o /otel/opentelemetry-javaagent.jar
       containers:
         - name: otlp
-          image: nginx
+          image: spring-server
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               protocol: TCP
       restartPolicy: Always
