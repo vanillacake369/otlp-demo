@@ -11,7 +11,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl
-RUN curl -o opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
+RUN curl --fail --show-error --location -o opentelemetry-javaagent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 COPY --from=builder /app/build/libs/*.jar app.jar
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
-ENTRYPOINT ["java", "-javaagent:/app/opentelemetry-javaagent.jar", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-javaagent:opentelemetry-javaagent.jar", "-jar", "app.jar"]
