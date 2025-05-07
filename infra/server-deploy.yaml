@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-server
+  labels:
+    app: spring-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-server
+  template:
+    metadata:
+      name: spring-server
+      labels:
+        app: spring-server
+      annotations:
+        instrumentation.opentelemetry.io/inject-java: "true"
+#        sidecar.opentelemetry.io/inject: "true"
+    spec:
+      volumes:
+        - name: spring-server-volume
+          emptyDir: {}
+      containers:
+        - name: spring-server
+          image: spring-server
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
