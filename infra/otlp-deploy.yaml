@@ -6,10 +6,6 @@ spec:
   # ToDo : 왜 이미지를 선언해야하는 거지,,? 튜토리얼에서는 안 보이는데,,, ㅇㅅㅇ,,
   image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:0.124.0
   mode: deployment # This configuration is omittable.
-  # ToDo : receivers, processors, exporters 에 대한 설정 처리하기
-  # ToDo : receivers, processors, exporters 에 대한 설정 처리하기
-  # ToDo : receivers, processors, exporters 에 대한 설정 처리하기
-  # ToDo : receivers, processors, exporters 에 대한 설정 처리하기
   config:
     receivers:
       otlp:
@@ -18,28 +14,34 @@ spec:
             endpoint: 0.0.0.0:4317
           http:
             endpoint: 0.0.0.0:4318
-    # ToDo : 아래 processor 들의 옵션이 다 무엇이지,,?
     processors:
-      memory_limiter:
-        check_interval: 1s
-        limit_percentage: 75
-        spike_limit_percentage: 15
       batch:
-        send_batch_size: 10000
-        timeout: 10s
     exporters:
-      # Data sources: metrics
+      # Metrics
       prometheus:
         endpoint: 0.0.0.0:8889
         namespace: default
-      # Data sources: traces
+      # Traces
       jaeger:
         endpoint: jaeger-server:4317
         tls:
           insecure: true
+      # Logs
+      loki:
+        endpoint: "http://loki:3100/otlp"
+        tls:
+          insecure: true
     service:
       pipelines:
+        metrics:
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ prometheus ]
         traces:
-          receivers: [otlp]
-          processors: []
-          exporters: [jaeger]
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ jaeger ]
+        logs:
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ loki ]
