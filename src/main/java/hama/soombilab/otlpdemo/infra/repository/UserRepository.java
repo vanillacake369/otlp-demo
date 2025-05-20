@@ -8,4 +8,6 @@ public interface UserRepository {
     List<User> findUsers();
 
     User save(User user);
+
+    User findUser(Long userIdx);
 }

@@ -1,6 +1,6 @@
 package hama.soombilab.otlpdemo.infra.dao;
 
-import hama.soombilab.otlpdemo.domain.Product;
+import hama.soombilab.otlpdemo.domain.Order;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -29,41 +28,35 @@ import org.hibernate.annotations.DynamicUpdate;
 @Builder(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductDao {
-
+public class OrderDao {
     @Id
-    @Comment("상품 ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long prdIdx;
+    private Long ordIdx;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uuid", nullable = false)
-    private UserDao owner;
+    private UserDao buyer;
 
-    @Column
-    private String name;
-
-    @Column
-    private BigDecimal price;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prd_idx", nullable = false)
+    private ProductDao product;
 
     @Column
     private Long quantity;
 
     @Column
-    private LocalDateTime createdAt;
+    private BigDecimal finalPrice;
 
     @Column
-    private LocalDateTime expiredAt;
+    private LocalDateTime orderedAt;
 
-    public static ProductDao fromDomain(Product product) {
-        return ProductDao.builder()
-            .prdIdx(product.getId())
-            .owner(UserDao.fromDomain(product.getOwner()))
-            .name(product.getName())
-            .price(product.getPrice().amount())
-            .quantity(product.getQuantity())
-            .createdAt(product.getCreatedAt())
-            .expiredAt(product.getExpiredAt())
+    public static OrderDao fromDomain(UserDao buyerDao, ProductDao productDao, Order order) {
+        return OrderDao.builder()
+            .buyer(buyerDao)
+            .product(productDao)
+            .quantity(order.getQuantity())
+            .finalPrice(order.getFinalPrice().amount())
+            .orderedAt(order.getOrderedAt())
             .build();
     }
 }

@@ -3,7 +3,6 @@ package hama.soombilab.otlpdemo.domain;
 import hama.soombilab.otlpdemo.feature.createUser.CreatUserRequest;
 import hama.soombilab.otlpdemo.global.value.Money;
 import hama.soombilab.otlpdemo.infra.dao.UserDao;
-import jakarta.persistence.Embedded;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,5 +39,13 @@ public class User {
             .phoneNumber(creatUserRequest.phoneNumber())
             .lastLogin(creatUserRequest.lastLogin())
             .build();
+    }
+
+    public void addBalance(Money finalPrice){
+        this.balance = this.balance.add(finalPrice);
+    }
+
+    public void deductBalance(Money finalPrice) {
+        this.balance = this.balance.sub(finalPrice);
     }
 }
