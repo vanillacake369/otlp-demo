@@ -1,7 +1,7 @@
 package hama.soombilab.otlpdemo.domain;
 
 import hama.soombilab.otlpdemo.global.value.Money;
-import hama.soombilab.otlpdemo.infra.dao.OrderDao;
+import hama.soombilab.otlpdemo.infra.data.OrderDao;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;

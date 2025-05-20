@@ -1,8 +1,8 @@
 package hama.soombilab.otlpdemo.domain;
 
-import hama.soombilab.otlpdemo.feature.createUser.CreatUserRequest;
+import hama.soombilab.otlpdemo.feature.createUser.api.dto.CreatUserRequest;
 import hama.soombilab.otlpdemo.global.value.Money;
-import hama.soombilab.otlpdemo.infra.dao.UserDao;
+import hama.soombilab.otlpdemo.infra.data.UserDao;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
