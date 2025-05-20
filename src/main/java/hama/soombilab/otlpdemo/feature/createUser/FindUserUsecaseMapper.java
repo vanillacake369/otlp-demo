@@ -1,13 +1,13 @@
-package hama.soombilab.otlpdemo.usecase;
+package hama.soombilab.otlpdemo.feature.createUser;
 
-import hama.soombilab.otlpdemo.controller.dto.response.UserResponse;
 import hama.soombilab.otlpdemo.domain.User;
+import hama.soombilab.otlpdemo.feature.findUser.FindUserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants.ComponentModel;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
-public interface UserUsecaseMapper {
+public interface FindUserUsecaseMapper {
 
-    UserResponse toUserResponse(User user);
+    FindUserResponse toFindUserResponse(User user);
 }

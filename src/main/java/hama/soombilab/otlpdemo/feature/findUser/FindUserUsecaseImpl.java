@@ -1,24 +1,25 @@
-package hama.soombilab.otlpdemo.usecase;
+package hama.soombilab.otlpdemo.feature.findUser;
 
-import hama.soombilab.otlpdemo.controller.dto.response.UserResponse;
 import hama.soombilab.otlpdemo.domain.User;
 import hama.soombilab.otlpdemo.infra.repository.UserRepository;
+import hama.soombilab.otlpdemo.feature.createUser.FindUserUsecaseMapper;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserQueryUsecase {
+public class FindUserUsecaseImpl implements FindUserUsecase {
 
-    private final UserUsecaseMapper userUsecaseMapper;
+    private final FindUserUsecaseMapper findUserUsecaseMapper;
     private final UserRepository userRepository;
 
-    public List<UserResponse> findUsers() {
+    @Override
+    public List<FindUserResponse> findUsers() {
         List<User> users = userRepository.findUsers();
         return users
             .stream()
-            .map(userUsecaseMapper::toUserResponse)
+            .map(findUserUsecaseMapper::toFindUserResponse)
             .toList();
     }
 }

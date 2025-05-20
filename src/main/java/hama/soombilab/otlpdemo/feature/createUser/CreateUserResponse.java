@@ -1,9 +1,8 @@
-package hama.soombilab.otlpdemo.controller.dto.response;
+package hama.soombilab.otlpdemo.feature.createUser;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-public record UserResponse(
+public record CreateUserResponse(
     // 고객 ID
     Long uuid,
     // 고객명

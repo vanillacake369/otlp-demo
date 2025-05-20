@@ -1,9 +1,8 @@
-package hama.soombilab.otlpdemo.controller.dto.request;
+package hama.soombilab.otlpdemo.feature.createUser;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-public record UserRequest(
+public record CreatUserRequest(
     // 고객명
     String name,
     // 전화번호
