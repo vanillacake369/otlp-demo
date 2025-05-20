@@ -49,9 +49,10 @@ dependencies {
     testImplementation 'com.github.database-rider:rider-spring:1.44.0' // Database Rider
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // Infra
+    implementation 'org.postgresql:postgresql:42.7.5' // PostgreSQL
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta' // QueryDSL JPA 라이브러리
     annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta' // QueryDSL 어노테이션 프로세서
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis' // redis
+    // implementation 'org.springframework.boot:spring-boot-starter-data-redis' // redis
 }
 
 // QueryDsl Build Options

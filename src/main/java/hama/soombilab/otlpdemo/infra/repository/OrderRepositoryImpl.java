@@ -9,9 +9,11 @@ import hama.soombilab.otlpdemo.infra.dao.UserDao;
 import hama.soombilab.otlpdemo.infra.dao.UserDaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 public class OrderRepositoryImpl implements OrderRepository {
 
     private final UserDaoRepository userDaoRepository;

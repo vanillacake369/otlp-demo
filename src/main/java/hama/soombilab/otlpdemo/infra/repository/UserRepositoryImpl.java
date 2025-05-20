@@ -6,9 +6,11 @@ import hama.soombilab.otlpdemo.infra.dao.UserDaoRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserDaoRepository userDaoRepository;
