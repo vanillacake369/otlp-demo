@@ -3,7 +3,6 @@ package hama.soombilab.otlpdemo.domain;
 import hama.soombilab.otlpdemo.controller.dto.request.UserRequest;
 import hama.soombilab.otlpdemo.infra.dao.UserDao;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,7 +11,7 @@ import lombok.Getter;
 public class User {
 
     // 고객 ID
-    private UUID uuid;
+    private Long uuid;
     // 고객명
     private String name;
     // 전화번호
@@ -22,17 +21,15 @@ public class User {
 
     public static User fromDao(UserDao userDao){
         return User.builder()
-            .uuid(userDao.uuid())
-            .name(userDao.name())
-            .phoneNumber(userDao.phoneNumber())
-            .lastLogin(userDao.lastLogin())
+            .uuid(userDao.getUuid())
+            .name(userDao.getName())
+            .phoneNumber(userDao.getPhoneNumber())
+            .lastLogin(userDao.getLastLogin())
             .build();
     }
 
     public static User create(UserRequest userRequest) {
-        UUID uuid = UUID.randomUUID();
         return User.builder()
-            .uuid(uuid)
             .name(userRequest.name())
             .phoneNumber(userRequest.phoneNumber())
             .lastLogin(userRequest.lastLogin())

@@ -6,20 +6,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class UserRepository {
 
-    private static final List<UserDao> USER_DAOS = new ArrayList<>(List.of(
-        new UserDao(UUID.randomUUID(), "John", "010-1234-1234", LocalDateTime.now()),
-        new UserDao(UUID.randomUUID(), "Jane", "010-1234-1234", LocalDateTime.now()),
-        new UserDao(UUID.randomUUID(), "Jackson", "010-1234-1234", LocalDateTime.now()),
-        new UserDao(UUID.randomUUID(), "Joe", "010-1234-1234", LocalDateTime.now())
-    ));
+    private final UserDaoRepository userDaoRepository;
 
     public List<User> findUsers() {
-        List<UserDao> userDaos = List.copyOf(USER_DAOS);
+        List<UserDao> userDaos = userDaoRepository.findAll();
         return userDaos
             .stream()
             .map(User::fromDao)
@@ -28,7 +25,7 @@ public class UserRepository {
 
     public User save(User user) {
         UserDao userDao = UserDao.fromDomain(user);
-        USER_DAOS.add(userDao);
+        userDaoRepository.save(userDao);
         return User.fromDao(userDao);
     }
 }

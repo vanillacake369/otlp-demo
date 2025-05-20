@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public record UserResponse(
     // 고객 ID
-    UUID uuid,
+    Long uuid,
     // 고객명
     String name,
     // 전화번호
