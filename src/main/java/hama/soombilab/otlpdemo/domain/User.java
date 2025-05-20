@@ -5,11 +5,12 @@ import hama.soombilab.otlpdemo.global.value.Money;
 import hama.soombilab.otlpdemo.infra.dao.UserDao;
 import jakarta.persistence.Embedded;
 import java.time.LocalDateTime;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 
-@Builder
 @Getter
+@Builder(access = AccessLevel.PROTECTED)
 public class User {
 
     // 고객 ID
