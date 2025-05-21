@@ -7,6 +7,7 @@ import hama.soombilab.otlpdemo.global.value.Money;
 import hama.soombilab.otlpdemo.domain.choco.infra.ChocoInfra;
 import hama.soombilab.otlpdemo.domain.user.infra.UserInfra;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
@@ -20,7 +21,7 @@ public class DeductBuyerBalance {
     private final ChocoInfra chocoInfra;
     private final UserInfra userInfra;
 
-    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    @EventListener
     public void deductBuyerBalance(OrderCreatedEvent orderCreatedEvent) {
         Order order = orderCreatedEvent.order();
         User buyer = order.getBuyer();

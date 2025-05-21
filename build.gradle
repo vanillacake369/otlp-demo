@@ -49,6 +49,7 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql:1.21.0' // PostgreSQL TestContainer
     testImplementation 'com.github.database-rider:rider-spring:1.44.0' // Database Rider
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.mockito:mockito-core:5.17.0'
     // Infra
     implementation 'org.postgresql:postgresql:42.7.5' // PostgreSQL
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta' // QueryDSL JPA 라이브러리
