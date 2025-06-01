@@ -58,7 +58,7 @@ dependencies {
 }
 
 // QueryDsl Build Options
-def querydslDir = "/build/generated/queryDsl"
+def querydslDir = layout.buildDirectory.dir("generated/querydsl").get().asFile
 
 sourceSets {
     main.java.srcDirs += [querydslDir]
