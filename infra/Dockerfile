@@ -8,7 +8,7 @@ RUN gradle assemble
 # Runtime Stage
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/chodan-java-api.jar app.jar
 RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 ENTRYPOINT ["java", "-jar", "app.jar"]
 # Java Agent

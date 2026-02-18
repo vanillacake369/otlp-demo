@@ -25,6 +25,17 @@ spec:
         - name: spring-server
           image: spring-server
           imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              value: "postgres"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "otlp_demo"
+            - name: DB_USER
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "postgres"
           ports:
             - containerPort: 8080
               protocol: TCP
